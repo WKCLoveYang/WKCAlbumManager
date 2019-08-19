@@ -39,6 +39,7 @@
 
 - (void)saveImage:(UIImage *)image atKey:(id)key
 {
+    if (!image || !key) return;
     [self.cache setObject:image forKey:key];
 }
 

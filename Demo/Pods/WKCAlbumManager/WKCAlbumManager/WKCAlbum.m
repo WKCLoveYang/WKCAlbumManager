@@ -38,12 +38,17 @@
     
     for (PHAsset * obj in itemFetchResult) {
         // 只要静图
-        if (obj.mediaType == PHAssetMediaTypeImage) {
+        if (obj.mediaType == PHAssetMediaTypeImage && obj.playbackStyle == PHAssetPlaybackStyleImage) {
             [array addObject:[[WKCPhoto alloc] initWithAsset:obj]];
         }
     }
     
     _photos = array;
+}
+
+- (WKCPhoto *)thumbPhoto
+{
+    return self.photos.firstObject;
 }
 
 @end

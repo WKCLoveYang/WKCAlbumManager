@@ -23,6 +23,11 @@ UICollectionViewDataSourcePrefetching>
 
 @implementation DetailViewController
 
+- (void)dealloc
+{
+    [NSNotificationCenter.defaultCenter removeObserver:self];
+}
+
 - (instancetype)initWithAlbum:(WKCAlbum *)album
 {
     if (self = [super init]) {
@@ -45,6 +50,14 @@ UICollectionViewDataSourcePrefetching>
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    
+    // 进入前台刷新数据
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(refeshData) name:UIApplicationDidBecomeActiveNotification object:nil];
+}
+
+- (void)refeshData
+{
+    [WKCAlbumManager.shared requestPhotoData];
 }
 
 

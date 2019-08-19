@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <WKCAlbum.h>
+#import <WKCAlbumManager.h>
 
 
 @interface DetailViewController : UIViewController

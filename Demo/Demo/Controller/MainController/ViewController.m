@@ -45,6 +45,9 @@ UICollectionViewDelegateFlowLayout>
     
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadData) name:WKCAlbumPhotoChangedNotification object:nil];
     
+    // 进入前台刷新数据
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(refeshData) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     [self.collectionView registerClass:WKCMainListCell.class forCellWithReuseIdentifier:NSStringFromClass(WKCMainListCell.class)];
 }
 
@@ -53,6 +56,11 @@ UICollectionViewDelegateFlowLayout>
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
+}
+
+- (void)refeshData
+{
+    [WKCAlbumManager.shared requestPhotoData];
 }
 
 - (void)showNoPremissionAlert
@@ -98,7 +106,7 @@ UICollectionViewDelegateFlowLayout>
     WKCAlbum * album = WKCAlbumManager.shared.albums[indexPath.row];
     cell.titleLabel.text = album.collection.localizedTitle;
     cell.countLabel.text = [NSString stringWithFormat:@"%ld", album.photos.count];
-    [album.photos.firstObject ftechPhoto:^(UIImage *photo) {
+    [album.thumbPhoto ftechPhoto:^(UIImage *photo) {
         cell.iconImageView.image = photo;
     }];
     return cell;
