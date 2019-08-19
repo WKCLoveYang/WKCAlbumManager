@@ -13,6 +13,8 @@
 
 // 图片数组
 @property (nonatomic, strong, readonly) NSArray <WKCPhoto *>* photos;
+// 缩略图
+@property (nonatomic, strong, readonly) WKCPhoto * thumbPhoto;
 @property (nonatomic, strong, readonly) PHAssetCollection * collection;
 
 - (instancetype)initWithCollection:(PHAssetCollection *)collection;
