@@ -38,7 +38,7 @@
     
     for (PHAsset * obj in itemFetchResult) {
         // 只要静图
-        if (obj.mediaType == PHAssetMediaTypeImage && obj.playbackStyle == PHAssetPlaybackStyleImage) {
+        if (obj.mediaType == PHAssetMediaTypeImage) {
             [array addObject:[[WKCPhoto alloc] initWithAsset:obj]];
         }
     }

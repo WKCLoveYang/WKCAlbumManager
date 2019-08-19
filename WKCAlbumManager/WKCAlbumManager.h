@@ -15,7 +15,7 @@ UIKIT_EXTERN NSString * const WKCAlbumVideoChangedNotification;
 
 @interface WKCAlbumManager : NSObject
 
-// 相册数组
+// images
 @property (nonatomic, strong, readonly) NSArray <WKCAlbum *>* albums;
 // videos
 @property (nonatomic, strong, readonly) NSArray <WKCVideo *> * videos;

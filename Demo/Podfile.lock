@@ -1,20 +1,26 @@
 PODS:
   - Masonry (1.1.0)
   - WKCAlbumManager (1.8.0)
+  - YYImage (1.0.4):
+    - YYImage/Core (= 1.0.4)
+  - YYImage/Core (1.0.4)
 
 DEPENDENCIES:
   - Masonry
   - WKCAlbumManager
+  - YYImage
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Masonry
     - WKCAlbumManager
+    - YYImage
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   WKCAlbumManager: 78fdec3436c534869396476fc02937a48e41fd2a
+  YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
-PODFILE CHECKSUM: 4a3a526e4c606d8df239ce02a50a15b366ee12e8
+PODFILE CHECKSUM: 9dffa646c8ed60b14af8a206a9f5631ad11a7c0e
 
 COCOAPODS: 1.7.5
