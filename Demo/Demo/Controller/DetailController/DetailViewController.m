@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import <Masonry.h>
 #import "WKCDetailCell.h"
+#import "UIImageView+CommonAlphaLoad.h"
 
 @interface DetailViewController ()
 <UICollectionViewDelegate,
@@ -94,7 +95,7 @@ UICollectionViewDataSourcePrefetching>
     WKCDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(WKCDetailCell.class) forIndexPath:indexPath];
     WKCPhoto * photo = _album.photos[indexPath.row];
     [photo ftechPhoto:^(UIImage *photo) {
-        cell.iconImageView.image = photo;
+        [cell.iconImageView alphaLoadImage:photo];
     }];
     return cell;
 }

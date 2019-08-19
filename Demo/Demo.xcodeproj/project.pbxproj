@@ -16,6 +16,7 @@
 		910462F7230A760300A847F2 /* WKCMainListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 910462F6230A760300A847F2 /* WKCMainListCell.m */; };
 		910462FB230A7BE800A847F2 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 910462FA230A7BE800A847F2 /* DetailViewController.m */; };
 		910462FF230A7CF200A847F2 /* WKCDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 910462FE230A7CF200A847F2 /* WKCDetailCell.m */; };
+		91046302230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 91046301230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m */; };
 		D1C70741030BFB4C91B7E22D /* libPods-default-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB5BB12A6141D25D73A6D9D /* libPods-default-Demo.a */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,8 @@
 		910462FA230A7BE800A847F2 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		910462FD230A7CF200A847F2 /* WKCDetailCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKCDetailCell.h; sourceTree = "<group>"; };
 		910462FE230A7CF200A847F2 /* WKCDetailCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKCDetailCell.m; sourceTree = "<group>"; };
+		91046300230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+CommonAlphaLoad.h"; sourceTree = "<group>"; };
+		91046301230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+CommonAlphaLoad.m"; sourceTree = "<group>"; };
 		BC017AA86580778D8CA6CD94 /* Pods-default-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-default-Demo.debug.xcconfig"; path = "Target Support Files/Pods-default-Demo/Pods-default-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +101,8 @@
 				910462E7230A73B500A847F2 /* LaunchScreen.storyboard */,
 				910462EA230A73B500A847F2 /* Info.plist */,
 				910462EB230A73B500A847F2 /* main.m */,
+				91046300230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.h */,
+				91046301230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -250,6 +255,7 @@
 				910462FB230A7BE800A847F2 /* DetailViewController.m in Sources */,
 				910462E1230A73B400A847F2 /* ViewController.m in Sources */,
 				910462EC230A73B500A847F2 /* main.m in Sources */,
+				91046302230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m in Sources */,
 				910462F7230A760300A847F2 /* WKCMainListCell.m in Sources */,
 				910462DE230A73B400A847F2 /* AppDelegate.m in Sources */,
 			);
