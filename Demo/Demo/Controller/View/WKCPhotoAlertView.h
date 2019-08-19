@@ -11,5 +11,7 @@
 
 @interface WKCPhotoAlertView : UIView
 
++ (void)showWithImage:(UIImage *)image;
+
 @end
 

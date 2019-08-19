@@ -10,6 +10,7 @@
 #import <Masonry.h>
 #import "WKCDetailCell.h"
 #import "UIImageView+CommonAlphaLoad.h"
+#import "WKCPhotoAlertView.h"
 
 @interface DetailViewController ()
 <UICollectionViewDelegate,
@@ -102,7 +103,10 @@ UICollectionViewDataSourcePrefetching>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    WKCPhoto * photo = _album.photos[indexPath.row];
+    [photo fetchPhoto:^(UIImage *photo) {
+        [WKCPhotoAlertView showWithImage:photo];
+    }];
 }
 
 #pragma mark -UICollectionViewDataSourcePrefetching
