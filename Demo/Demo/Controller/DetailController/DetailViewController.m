@@ -94,10 +94,15 @@ UICollectionViewDataSourcePrefetching>
 {
     WKCDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(WKCDetailCell.class) forIndexPath:indexPath];
     WKCPhoto * photo = _album.photos[indexPath.row];
-    [photo ftechPhoto:^(UIImage *photo) {
+    [photo fetchThumbAtSize:WKCDetailCell.itemSize handle:^(UIImage *photo) {
         [cell.iconImageView alphaLoadImage:photo];
     }];
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 #pragma mark -UICollectionViewDataSourcePrefetching
@@ -106,7 +111,7 @@ UICollectionViewDataSourcePrefetching>
     // 预加载
     for (NSIndexPath * indexPath in indexPaths) {
         WKCPhoto * photo = _album.photos[indexPath.row];
-        [photo ftechPhoto:nil];
+        [photo fetchThumbAtSize:WKCDetailCell.itemSize handle:nil];
     }
 }
 

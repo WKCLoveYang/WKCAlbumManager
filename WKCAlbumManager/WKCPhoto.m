@@ -38,7 +38,7 @@
     return _options;
 }
 
-- (void)ftechPhoto:(void(^)(UIImage * photo))handle
+- (void)fetchThumbAtSize:(CGSize )size handle:(void(^)(UIImage * photo))handle
 {
     UIImage * cacheImage = [WKCCacheaManager.shared readImageAtKey:_asset];
     if (cacheImage) {
@@ -47,7 +47,7 @@
         }
     } else {
         __weak typeof(self)weakSelf = self;
-        [PHImageManager.defaultManager requestImageForAsset:_asset targetSize:CGSizeMake(_asset.pixelWidth, _asset.pixelHeight) contentMode:PHImageContentModeDefault options:self.options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        [PHImageManager.defaultManager requestImageForAsset:_asset targetSize:CGSizeMake(size.width * UIScreen.mainScreen.scale, size.height * UIScreen.mainScreen.scale) contentMode:PHImageContentModeDefault options:self.options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [WKCCacheaManager.shared saveImage:result
                                              atKey:weakSelf.asset];
@@ -57,6 +57,18 @@
             });
         }];
     }
+    
+}
+
+- (void)fetchPhoto:(void(^)(UIImage * photo))handle
+{
+    [PHImageManager.defaultManager requestImageForAsset:_asset targetSize:CGSizeMake(_asset.pixelWidth, _asset.pixelHeight) contentMode:PHImageContentModeDefault options:self.options resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (handle) {
+                handle(result);
+            }
+        });
+    }];
 }
 
 @end

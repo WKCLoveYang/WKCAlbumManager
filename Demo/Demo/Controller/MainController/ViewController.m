@@ -106,7 +106,7 @@ UICollectionViewDelegateFlowLayout>
     WKCAlbum * album = WKCAlbumManager.shared.albums[indexPath.row];
     cell.titleLabel.text = album.collection.localizedTitle;
     cell.countLabel.text = [NSString stringWithFormat:@"%ld", album.photos.count];
-    [album.thumbPhoto ftechPhoto:^(UIImage *photo) {
+    [album.thumbPhoto fetchThumbAtSize:CGSizeMake(80, 80) handle:^(UIImage *photo) {
         cell.iconImageView.image = photo;
     }];
     return cell;
