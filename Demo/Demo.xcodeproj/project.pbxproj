@@ -107,12 +107,6 @@
 				910462E7230A73B500A847F2 /* LaunchScreen.storyboard */,
 				910462EA230A73B500A847F2 /* Info.plist */,
 				910462EB230A73B500A847F2 /* main.m */,
-				91046300230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.h */,
-				91046301230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m */,
-				91046303230A9C1B00A847F2 /* UIView+Alert.h */,
-				91046304230A9C1B00A847F2 /* UIView+Alert.m */,
-				91046306230A9C3900A847F2 /* WKCPhotoAlertView.h */,
-				91046307230A9C3900A847F2 /* WKCPhotoAlertView.m */,
 			);
 			path = Demo;
 			sourceTree = "<group>";
@@ -120,6 +114,8 @@
 		910462F2230A752D00A847F2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				91046309230A9CC600A847F2 /* Category */,
+				9104630A230A9CD300A847F2 /* View */,
 				910462F3230A756000A847F2 /* MainController */,
 				910462F8230A7BCF00A847F2 /* DetailController */,
 			);
@@ -161,6 +157,26 @@
 			children = (
 				910462FD230A7CF200A847F2 /* WKCDetailCell.h */,
 				910462FE230A7CF200A847F2 /* WKCDetailCell.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		91046309230A9CC600A847F2 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				91046300230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.h */,
+				91046301230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m */,
+				91046303230A9C1B00A847F2 /* UIView+Alert.h */,
+				91046304230A9C1B00A847F2 /* UIView+Alert.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		9104630A230A9CD300A847F2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				91046306230A9C3900A847F2 /* WKCPhotoAlertView.h */,
+				91046307230A9C3900A847F2 /* WKCPhotoAlertView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
