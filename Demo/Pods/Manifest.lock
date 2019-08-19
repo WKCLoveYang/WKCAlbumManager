@@ -1,6 +1,6 @@
 PODS:
   - Masonry (1.1.0)
-  - WKCAlbumManager (1.3.0)
+  - WKCAlbumManager (1.6.0)
 
 DEPENDENCIES:
   - Masonry
@@ -13,7 +13,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  WKCAlbumManager: d32a595d5d115dcad73b2a17d1fc3cb3fa5cbf7a
+  WKCAlbumManager: abad770e537d6702ac49c5e138144bc3ccbb71fd
 
 PODFILE CHECKSUM: 4a3a526e4c606d8df239ce02a50a15b366ee12e8
 
