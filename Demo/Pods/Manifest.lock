@@ -1,0 +1,20 @@
+PODS:
+  - Masonry (1.1.0)
+  - WKCAlbumManager (1.1.0)
+
+DEPENDENCIES:
+  - Masonry
+  - WKCAlbumManager
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Masonry
+    - WKCAlbumManager
+
+SPEC CHECKSUMS:
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  WKCAlbumManager: 49b174f76e6f6fe4e747d8a32ac35f403d27455f
+
+PODFILE CHECKSUM: 4a3a526e4c606d8df239ce02a50a15b366ee12e8
+
+COCOAPODS: 1.7.5
