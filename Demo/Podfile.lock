@@ -1,6 +1,6 @@
 PODS:
   - Masonry (1.1.0)
-  - WKCAlbumManager (2.6.0)
+  - WKCAlbumManager (2.8.0)
   - YYImage (1.0.4):
     - YYImage/Core (= 1.0.4)
   - YYImage/Core (1.0.4)
@@ -18,7 +18,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  WKCAlbumManager: 66c52f8a9e24235b8476a4e917d6af2ee00e7f1b
+  WKCAlbumManager: d9e9384b38ff2fa6d755aa29079051c37b7c6d72
   YYImage: 1e1b62a9997399593e4b9c4ecfbbabbf1d3f3b54
 
 PODFILE CHECKSUM: 9dffa646c8ed60b14af8a206a9f5631ad11a7c0e

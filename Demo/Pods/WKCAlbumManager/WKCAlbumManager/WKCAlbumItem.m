@@ -27,6 +27,7 @@
     return self;
 }
 
+
 - (WKCAlbumItemType)type
 {
     if (_asset.mediaType == PHAssetMediaTypeImage) {
