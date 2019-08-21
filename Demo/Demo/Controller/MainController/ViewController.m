@@ -32,8 +32,6 @@ UICollectionViewDelegateFlowLayout>
 {
     [super viewDidLoad];
     
-    WKCAlbumManager.shared.shouldContainsGif = YES;
-    
     [WKCAlbumManager.shared premissionHandle:^(WKCAlbumManager *manager, BOOL isPremissioned) {
         if (isPremissioned) {
             [manager requestPhotoData];

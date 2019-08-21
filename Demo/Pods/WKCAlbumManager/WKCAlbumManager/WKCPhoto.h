@@ -14,6 +14,6 @@
 - (instancetype)initWithAsset:(PHAsset *)asset;
 
 - (void)fetchThumbAtSize:(CGSize )size handle:(void(^)(UIImage * photo))handle; // 获取缩略图照片
-- (void)fetchPhoto:(void(^)(NSData * photoData))handle; // 获取原图照片
+- (void)fetchPhoto:(void(^)(UIImage * photo))handle; // 获取原图照片
 
 @end

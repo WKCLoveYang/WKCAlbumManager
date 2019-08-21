@@ -6,7 +6,6 @@ def shared_pods
 
 pod 'Masonry'
 pod 'WKCAlbumManager'
-pod 'YYImage'
 
 end
 

@@ -76,7 +76,7 @@ NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
     
     for (PHAssetCollection * collection in collections) {
         WKCAlbum * album = [[WKCAlbum alloc] initWithCollection:collection];
-        [album fetchPhotos:self.shouldContainsGif];
+        [album fetchPhotos];
         if (album.photos.count != 0) {
             [albums addObject:album];
         }

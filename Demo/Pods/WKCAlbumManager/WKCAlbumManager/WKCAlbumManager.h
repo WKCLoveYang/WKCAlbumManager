@@ -20,6 +20,7 @@ UIKIT_EXTERN NSString * const WKCAlbumVideoChangedNotification;
 // videos
 @property (nonatomic, strong, readonly) NSArray <WKCVideo *> * videos;
 
+
 + (WKCAlbumManager *)shared;
 
 - (void)premissionHandle:(void(^)(WKCAlbumManager * manager, BOOL isPremissioned))handle;

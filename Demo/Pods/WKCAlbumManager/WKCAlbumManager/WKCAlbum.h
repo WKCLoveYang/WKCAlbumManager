@@ -19,7 +19,7 @@
 
 - (instancetype)initWithCollection:(PHAssetCollection *)collection;
 
-- (void)fetchPhotos:(BOOL)shouldContainsGif;
+- (void)fetchPhotos;
 
 @end
 
