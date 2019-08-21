@@ -6,23 +6,29 @@
 //  Copyright © 2019 wkcloveYang. All rights reserved.
 //
 
-#import "WKCCacheManager.h"
+#import "WKCAlbumCacheManager.h"
 #import "WKCAlbumParams.h"
 
-@implementation WKCCacheManager
+@implementation WKCAlbumCacheManager
 
-+ (WKCCacheManager *)shared
++ (WKCAlbumCacheManager *)shared
 {
-    static WKCCacheManager * instance = nil;
+    static WKCAlbumCacheManager * instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[WKCCacheManager alloc] init];
+        instance = [[WKCAlbumCacheManager alloc] init];
     });
     
     return instance;
 }
 
-
+- (void)startCacheAssets:(NSArray <PHAsset *>*)assets
+              targetSize:(CGSize)targetSize
+{
+    [self startCacheAssets:assets
+                targetSize:targetSize
+                   options:WKCAlbumParams.shared.imageOptions];
+}
 
 - (void)startCacheAssets:(NSArray <PHAsset *>*)assets
               targetSize:(CGSize)targetSize

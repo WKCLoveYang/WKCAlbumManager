@@ -49,7 +49,10 @@ typedef NS_ENUM(NSInteger, WKCAlbumItemType) {
  */
 @property (nonatomic, assign, readonly) WKCAlbumItemType type;
 
-
+/**
+ iCloud数据的下载进度
+ */
+@property (nonatomic, copy, readonly) PHAssetImageProgressHandler iCloudProgressHandle;
 
 
 /**
@@ -60,8 +63,8 @@ typedef NS_ENUM(NSInteger, WKCAlbumItemType) {
 
 
 /**
-  请求Image缩略图 (请求缩略图时, 不能判断是都在iCloud)
-  @param size 大小
+  请求Image缩略图 (请求缩略图时, 不能判断是否在iCloud)
+  @param size   大小
   @param handle 回调
  */
 - (void)fetchImageThumbAtSize:(CGSize )size
@@ -106,7 +109,7 @@ typedef NS_ENUM(NSInteger, WKCAlbumItemType) {
 
 /**
   请求Video缩略图
-  @param size 大小
+  @param size   大小
   @param handle 回调
  */
 - (void)fetchVideoThumbnailAtSize:(CGSize)size

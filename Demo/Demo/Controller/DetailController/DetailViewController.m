@@ -114,12 +114,12 @@ UICollectionViewDataSourcePrefetching>
         [array addObject:item.asset];
     }
     
-    [WKCCacheManager.shared startCacheAssets:array targetSize:WKCDetailCell.itemSize options:WKCAlbumParams.shared.imageOptions];
+    [WKCAlbumCacheManager.shared startCacheAssets:array targetSize:WKCDetailCell.itemSize];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
 {
-    [WKCCacheManager.shared stopCacheAssets];
+    [WKCAlbumCacheManager.shared stopCacheAssets];
 }
 
 @end

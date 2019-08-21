@@ -32,12 +32,16 @@ UICollectionViewDelegateFlowLayout>
 {
     [super viewDidLoad];
     
-    [WKCAlbumManager askAlbumPremission];
     WKCAlbumManager.shared.requstType = WKCAlbumRequstTypeImageAndGif;
     
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showNoPremissionAlert) name:WKCAlbumNotificationPremissionNO object:nil];
-    
-    [self refeshData];
+    [WKCAlbumManager.shared requstAlbumDataHandle:^(NSArray<WKCAlbum *> *albums, WKCAlbumPremissionStatus status) {
+        if (status == WKCAlbumPremissionStatusUnAuthorized) {
+            [self showNoPremissionAlert];
+        } else {
+            self.albums = albums;
+            [self reloadData];
+        }
+    }];
     
     [self.collectionView registerClass:WKCMainListCell.class forCellWithReuseIdentifier:NSStringFromClass(WKCMainListCell.class)];
 }
@@ -47,14 +51,6 @@ UICollectionViewDelegateFlowLayout>
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
     });
-}
-
-- (void)refeshData
-{
-    [WKCAlbumManager.shared requstAlbumDataHandle:^(NSArray<WKCAlbum *> *albums) {
-        self.albums = albums;
-        [self reloadData];
-    }];
 }
 
 - (void)showNoPremissionAlert
