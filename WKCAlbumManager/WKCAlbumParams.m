@@ -32,7 +32,6 @@
     return instance;
 }
 
-
 - (PHImageRequestOptions *)imageOptions
 {
     if (!_imageOptions) {

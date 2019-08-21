@@ -11,7 +11,6 @@
 
 NSString * const WKCAlbumNotificationPremissionYES = @"com.premission.yes";
 NSString * const WKCAlbumNotificationPremissionNO  = @"com.premission.no";
-NSString * const WKCAlbumNotificationAlbumDataRefreshed = @"com.data.refresh";
 
 @interface WKCAlbumManager()
 
@@ -32,21 +31,6 @@ NSString * const WKCAlbumNotificationAlbumDataRefreshed = @"com.data.refresh";
     return instance;
 }
 
-- (void)dealloc
-{
-    [NSNotificationCenter.defaultCenter removeObserver:self];
-}
-
-- (instancetype)init
-{
-    if (self = [super init]) {
-        
-        [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(requstAlbumData) name:UIApplicationDidBecomeActiveNotification object:nil];
-    }
-    
-    return self;
-}
-
 + (void)askAlbumPremission
 {
     NSString * premissionSaveKey = @"album.premission.key";
@@ -65,7 +49,7 @@ NSString * const WKCAlbumNotificationAlbumDataRefreshed = @"com.data.refresh";
 }
 
 
-- (void)requstAlbumData
+- (void)requstAlbumDataHandle:(void(^)(NSArray <WKCAlbum *> * albums))handle
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -73,8 +57,10 @@ NSString * const WKCAlbumNotificationAlbumDataRefreshed = @"com.data.refresh";
         NSArray *albums = [self getAlbums];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.albums = albums;
-            [NSNotificationCenter.defaultCenter postNotificationName:WKCAlbumNotificationAlbumDataRefreshed object:nil];
             dispatch_semaphore_signal(semaphore);
+            if (handle) {
+                handle(albums);
+            }
         });
     });
 }
@@ -83,7 +69,7 @@ NSString * const WKCAlbumNotificationAlbumDataRefreshed = @"com.data.refresh";
 - (NSArray <WKCAlbum *>*)getAlbums
 {
     PHFetchResult<PHAssetCollection *> * collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum
-                                                                                                subtype:PHAssetCollectionSubtypeAny
+                                                                                                subtype:PHAssetCollectionSubtypeAlbumRegular
                                                                                                 options:nil];
     
     NSMutableArray <WKCAlbum *>* albums = [NSMutableArray array];

@@ -16,8 +16,6 @@
 UIKIT_EXTERN NSString * const WKCAlbumNotificationPremissionYES;
 /**权限关*/
 UIKIT_EXTERN NSString * const WKCAlbumNotificationPremissionNO;
-/**相册数据*/
-UIKIT_EXTERN NSString * const WKCAlbumNotificationAlbumDataRefreshed;
 
 
 @interface WKCAlbumManager : NSObject
@@ -45,7 +43,10 @@ UIKIT_EXTERN NSString * const WKCAlbumNotificationAlbumDataRefreshed;
 
 /**
  请求相册数据
+ @param handle 回调
  */
-- (void)requstAlbumData;
+- (void)requstAlbumDataHandle:(void(^)(NSArray <WKCAlbum *> * albums))handle;
+
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "WKCAlbum.h"
+#import "WKCAlbumParams.h"
 
 @interface WKCAlbum()
 
@@ -32,12 +33,10 @@
 
 - (void)fetchItems
 {
-    NSMutableArray * array = [NSMutableArray array];
+    NSMutableArray <WKCAlbumItem *>* array = [NSMutableArray array];
     
-    PHFetchOptions * options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]];
-    
-    PHFetchResult<PHAsset *> * itemFetchResult = [PHAsset fetchAssetsInAssetCollection:_collection options:options];
+    // options nil 默认是按日期递增(同系统一样)
+    PHFetchResult<PHAsset *> * itemFetchResult = [PHAsset fetchAssetsInAssetCollection:_collection options:nil];
     
     if (!itemFetchResult.count) return;
     
@@ -129,10 +128,10 @@
                 break;
         }
         
-        
     }
     
-    _items = array;
+    // 按日期递减
+    _items = [[array reverseObjectEnumerator] allObjects];
 }
 
 - (WKCAlbumItem *)thumbItem

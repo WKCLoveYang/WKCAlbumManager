@@ -11,6 +11,7 @@
 
 @interface WKCAlbumParams : NSObject
 
+
 /**
  通用Option参数
  */
