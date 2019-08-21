@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, WKCAlbumRequstType) {
 /**
   初始化
   @param collection 相册集
-  @param type Requst类型
+  @param type       Requst类型
  */
 - (instancetype)initWithCollection:(PHAssetCollection *)collection
                         requstType:(WKCAlbumRequstType)type;

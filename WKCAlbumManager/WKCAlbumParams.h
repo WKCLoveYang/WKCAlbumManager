@@ -37,7 +37,9 @@
  */
 @property (nonatomic, strong, readonly) PHCachingImageManager * imageManager;
 
-
+/**
+  单例对象
+ */
 + (WKCAlbumParams *)shared;
 
 @end
