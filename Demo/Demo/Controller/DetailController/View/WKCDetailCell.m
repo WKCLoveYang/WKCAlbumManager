@@ -12,6 +12,8 @@
 @interface WKCDetailCell()
 
 @property (nonatomic, strong) UIImageView * iconImageView;
+@property (nonatomic, strong) UIImageView * iCloudImageView;
+
 
 @end
 
@@ -19,7 +21,7 @@
 
 + (CGSize)itemSize
 {
-    CGFloat width = floor((UIScreen.mainScreen.bounds.size.width - 8 * 2 - 2 * 2) / 3.0);
+    CGFloat width = floor((UIScreen.mainScreen.bounds.size.width - 2 * 2) / 3.0);
     return CGSizeMake(width, width);
 }
 
@@ -28,8 +30,14 @@
     if (self = [super initWithFrame:frame]) {
         
         [self.contentView addSubview:self.iconImageView];
+        [self.contentView addSubview:self.iCloudImageView];
+        
+        
         [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.equalTo(self.contentView);
+        }];
+        [self.iCloudImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.bottom.equalTo(self.contentView).offset(-5);
         }];
     }
     
@@ -45,6 +53,16 @@
     }
     
     return _iconImageView;
+}
+
+- (UIImageView *)iCloudImageView
+{
+    if (!_iCloudImageView) {
+        _iCloudImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icon_iCloud"]];
+        _iCloudImageView.hidden = YES;
+    }
+    
+    return _iCloudImageView;
 }
 
 @end

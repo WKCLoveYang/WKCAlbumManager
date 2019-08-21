@@ -11,17 +11,19 @@
 
 @interface WKCPhotoAlertView()
 
-@property (nonatomic, strong) UIImageView * imageView;
+@property (nonatomic, strong) YYAnimatedImageView * imageView;
 
 @end
 
 @implementation WKCPhotoAlertView
 
-+ (void)showWithImage:(UIImage *)image
++ (void)showWithImage:(YYImage *)image
 {
-    WKCPhotoAlertView * alertView = [[WKCPhotoAlertView alloc] init];
-    alertView.imageView.image = image;
-    [alertView show];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        WKCPhotoAlertView * alertView = [[WKCPhotoAlertView alloc] init];
+        alertView.imageView.image = image;
+        [alertView show];
+    });
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -45,10 +47,10 @@
     return self;
 }
 
-- (UIImageView *)imageView
+- (YYAnimatedImageView *)imageView
 {
     if (!_imageView) {
-        _imageView = [[UIImageView alloc] init];
+        _imageView = [[YYAnimatedImageView alloc] init];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
     }
     

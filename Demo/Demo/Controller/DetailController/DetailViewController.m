@@ -53,15 +53,7 @@ UICollectionViewDataSourcePrefetching>
         make.edges.equalTo(self.view);
     }];
     
-    // 进入前台刷新数据
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(refeshData) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
-
-- (void)refeshData
-{
-    [WKCAlbumManager.shared requestPhotoData];
-}
-
 
 - (UICollectionView *)collectionView
 {
@@ -78,7 +70,7 @@ UICollectionViewDataSourcePrefetching>
         _collectionView.prefetchDataSource = self;
         _collectionView.backgroundView = nil;
         _collectionView.backgroundColor = nil;
-        _collectionView.contentInset = UIEdgeInsetsMake(20, 8, 40, 8);
+        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 40, 0);
         [_collectionView registerClass:WKCDetailCell.class forCellWithReuseIdentifier:NSStringFromClass(WKCDetailCell.class)];
     }
     
@@ -88,36 +80,46 @@ UICollectionViewDataSourcePrefetching>
 #pragma mark -UICollectionViewDelegate, UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return _album.photos.count;
+    return _album.items.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     WKCDetailCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(WKCDetailCell.class) forIndexPath:indexPath];
-    WKCPhoto * photo = _album.photos[indexPath.row];
-    [photo fetchThumbAtSize:WKCDetailCell.itemSize handle:^(UIImage *photo) {
-        [cell.iconImageView alphaLoadImage:photo];
+    WKCAlbumItem * item = _album.items[indexPath.row];
+    [item fetchImageThumbAtSize:WKCDetailCell.itemSize handle:^(UIImage *image, NSDictionary *info) {
+        cell.iconImageView.image = image;
+        [item fetchImageWithiCloudAnalyseHandle:^(BOOL isIniCloud) {
+            cell.iCloudImageView.hidden = !isIniCloud;
+        }];
     }];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    WKCPhoto * photo = _album.photos[indexPath.row];
-    [photo fetchPhoto:^(UIImage *photo) {
-        [WKCPhotoAlertView showWithImage:photo];
+    WKCAlbumItem * item = _album.items[indexPath.row];
+    [item fetchImageOrGifDataHandle:^(NSData *data, NSDictionary *info) {
+        [WKCPhotoAlertView showWithImage:[YYImage imageWithData:data]];
     }];
 }
 
 #pragma mark -UICollectionViewDataSourcePrefetching
 - (void)collectionView:(UICollectionView *)collectionView prefetchItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
 {
+    NSMutableArray * array = [NSMutableArray array];
     // 预加载
     for (NSIndexPath * indexPath in indexPaths) {
-        WKCPhoto * photo = _album.photos[indexPath.row];
-        [photo fetchThumbAtSize:WKCDetailCell.itemSize handle:nil];
+        WKCAlbumItem * item = _album.items[indexPath.row];
+        [array addObject:item.asset];
     }
+    
+    [WKCCacheManager.shared startCacheAssets:array targetSize:WKCDetailCell.itemSize options:WKCAlbumParams.shared.imageOptions];
 }
 
+- (void)collectionView:(UICollectionView *)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
+{
+    [WKCCacheManager.shared stopCacheAssets];
+}
 
 @end

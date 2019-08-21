@@ -1,0 +1,1 @@
+../../../WKCAlbumManager/WKCAlbumManager/WKCAlbumItem.h

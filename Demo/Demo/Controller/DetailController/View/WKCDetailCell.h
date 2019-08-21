@@ -10,7 +10,8 @@
 
 @interface WKCDetailCell : UICollectionViewCell
 
-@property (nonatomic, strong, readonly) UIImageView * iconImageView;;
+@property (nonatomic, strong, readonly) UIImageView * iconImageView;
+@property (nonatomic, strong, readonly) UIImageView * iCloudImageView;
 
 + (CGSize)itemSize;
 

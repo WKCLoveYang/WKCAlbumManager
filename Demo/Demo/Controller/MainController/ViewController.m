@@ -32,21 +32,12 @@ UICollectionViewDelegateFlowLayout>
 {
     [super viewDidLoad];
     
-    [WKCAlbumManager.shared premissionHandle:^(WKCAlbumManager *manager, BOOL isPremissioned) {
-        if (isPremissioned) {
-            [manager requestPhotoData];
-            [self reloadData];
-        } else {
-            [self showNoPremissionAlert];
-        }
-    }];
+    [WKCAlbumManager askAlbumPremission];
+    WKCAlbumManager.shared.requstType = WKCAlbumRequstTypeImageAndGif;
     
-    [WKCAlbumManager.shared requestPhotoData];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(showNoPremissionAlert) name:WKCAlbumNotificationPremissionNO object:nil];
     
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(reloadData) name:WKCAlbumPhotoChangedNotification object:nil];
-    
-    // 进入前台刷新数据
-    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(refeshData) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [self refeshData];
     
     [self.collectionView registerClass:WKCMainListCell.class forCellWithReuseIdentifier:NSStringFromClass(WKCMainListCell.class)];
 }
@@ -60,7 +51,10 @@ UICollectionViewDelegateFlowLayout>
 
 - (void)refeshData
 {
-    [WKCAlbumManager.shared requestPhotoData];
+    [WKCAlbumManager.shared requstAlbumDataHandle:^(NSArray<WKCAlbum *> *albums) {
+        self.albums = albums;
+        [self reloadData];
+    }];
 }
 
 - (void)showNoPremissionAlert
@@ -105,16 +99,16 @@ UICollectionViewDelegateFlowLayout>
     WKCMainListCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(WKCMainListCell.class) forIndexPath:indexPath];
     WKCAlbum * album = WKCAlbumManager.shared.albums[indexPath.row];
     cell.titleLabel.text = album.collection.localizedTitle;
-    cell.countLabel.text = [NSString stringWithFormat:@"%ld", album.photos.count];
-    [album.thumbPhoto fetchThumbAtSize:CGSizeMake(80, 80) handle:^(UIImage *photo) {
-        cell.iconImageView.image = photo;
+    cell.countLabel.text = [NSString stringWithFormat:@"%ld", album.items.count];
+    [album.thumbItem fetchImageThumbAtSize:CGSizeMake(80, 80) handle:^(UIImage *image, NSDictionary *info) {
+        cell.iconImageView.image = image;
     }];
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   WKCAlbum * album = WKCAlbumManager.shared.albums[indexPath.row];
+   WKCAlbum * album = self.albums[indexPath.row];
     
     DetailViewController * detailVC = [[DetailViewController alloc] initWithAlbum:album];
     detailVC.navigationItem.title = album.collection.localizedTitle;

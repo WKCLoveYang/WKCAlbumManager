@@ -7,24 +7,46 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WKCVideo.h"
+#import <Photos/Photos.h>
 #import "WKCAlbum.h"
+#import "WKCCacheManager.h"
+#import "WKCAlbumParams.h"
 
-UIKIT_EXTERN NSString * const WKCAlbumPhotoChangedNotification;
-UIKIT_EXTERN NSString * const WKCAlbumVideoChangedNotification;
+/**权限开*/
+UIKIT_EXTERN NSString * const WKCAlbumNotificationPremissionYES;
+/**权限关*/
+UIKIT_EXTERN NSString * const WKCAlbumNotificationPremissionNO;
+
 
 @interface WKCAlbumManager : NSObject
 
-// images
-@property (nonatomic, strong, readonly) NSArray <WKCAlbum *>* albums;
-// videos
-@property (nonatomic, strong, readonly) NSArray <WKCVideo *> * videos;
+/**
+  相册集合
+ */
+@property (nonatomic, strong, readonly) NSArray <WKCAlbum *> * albums;
 
+/**
+  请求的数据类型
+ */
+@property (nonatomic, assign) WKCAlbumRequstType requstType;
 
+/**
+ 单例对象
+ */
 + (WKCAlbumManager *)shared;
 
-- (void)premissionHandle:(void(^)(WKCAlbumManager * manager, BOOL isPremissioned))handle;
-- (void)requestPhotoData; //获取静图数据
-- (void)requestVideoData; //获取video数据
+/**
+ 询问相册权限
+ */
++ (void)askAlbumPremission;
+
+
+/**
+ 请求相册数据
+ @param handle 回调
+ */
+- (void)requstAlbumDataHandle:(void(^)(NSArray <WKCAlbum *> * albums))handle;
+
+
 
 @end

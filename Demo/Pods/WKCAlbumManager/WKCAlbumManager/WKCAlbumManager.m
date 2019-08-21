@@ -8,13 +8,13 @@
 
 #import "WKCAlbumManager.h"
 
-NSString * const WKCAlbumPhotoChangedNotification = @"album.photo.notification";
-NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
+
+NSString * const WKCAlbumNotificationPremissionYES = @"com.premission.yes";
+NSString * const WKCAlbumNotificationPremissionNO  = @"com.premission.no";
 
 @interface WKCAlbumManager()
 
-@property (nonatomic, strong) NSArray <WKCAlbum *>* albums;
-@property (nonatomic, strong) NSArray <WKCVideo *> * videos;
+@property (nonatomic, strong) NSArray <WKCAlbum *> * albums;
 
 @end
 
@@ -31,19 +31,17 @@ NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
     return instance;
 }
 
-- (void)premissionHandle:(void (^)(WKCAlbumManager * manager, BOOL isPremissioned))handle
++ (void)askAlbumPremission
 {
     NSString * premissionSaveKey = @"album.premission.key";
     [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (handle) {
-                if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
-                    handle(self, NO);
-                } else {
-                    if (![NSUserDefaults.standardUserDefaults boolForKey:premissionSaveKey]) {
-                        handle(self, YES);
-                        [NSUserDefaults.standardUserDefaults setBool:YES forKey:premissionSaveKey];
-                    }
+            if (status == PHAuthorizationStatusRestricted || status == PHAuthorizationStatusDenied) {
+                [NSNotificationCenter.defaultCenter postNotificationName:WKCAlbumNotificationPremissionNO object:nil];
+            } else {
+                if (![NSUserDefaults.standardUserDefaults boolForKey:premissionSaveKey]) {
+                    [NSUserDefaults.standardUserDefaults setBool:YES forKey:premissionSaveKey];
+                    [NSNotificationCenter.defaultCenter postNotificationName:WKCAlbumNotificationPremissionYES object:nil];
                 }
             }
         });
@@ -51,7 +49,7 @@ NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
 }
 
 
-- (void)requestPhotoData
+- (void)requstAlbumDataHandle:(void(^)(NSArray <WKCAlbum *> * albums))handle
 {
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -59,8 +57,10 @@ NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
         NSArray *albums = [self getAlbums];
         dispatch_async(dispatch_get_main_queue(), ^{
             self.albums = albums;
-            [NSNotificationCenter.defaultCenter postNotificationName:WKCAlbumPhotoChangedNotification object:nil];
             dispatch_semaphore_signal(semaphore);
+            if (handle) {
+                handle(albums);
+            }
         });
     });
 }
@@ -69,15 +69,15 @@ NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
 - (NSArray <WKCAlbum *>*)getAlbums
 {
     PHFetchResult<PHAssetCollection *> * collections = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum
-                                                                                                subtype:PHAssetCollectionSubtypeAny
+                                                                                                subtype:PHAssetCollectionSubtypeAlbumRegular
                                                                                                 options:nil];
     
     NSMutableArray <WKCAlbum *>* albums = [NSMutableArray array];
     
     for (PHAssetCollection * collection in collections) {
-        WKCAlbum * album = [[WKCAlbum alloc] initWithCollection:collection];
-        [album fetchPhotos];
-        if (album.photos.count != 0) {
+        WKCAlbum * album = [[WKCAlbum alloc] initWithCollection:collection requstType:self.requstType];
+        [album fetchItems];
+        if (album.items && album.items.count != 0) {
             [albums addObject:album];
         }
     }
@@ -85,40 +85,8 @@ NSString * const WKCAlbumVideoChangedNotification = @"album.video.notification";
     return [albums sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
         WKCAlbum * album1 = (WKCAlbum *)obj1;
         WKCAlbum * album2 = (WKCAlbum *)obj2;
-        return album1.photos.count < album2.photos.count;
+        return album1.items.count < album2.items.count;
     }];
-}
-
-
-
-- (void)requestVideoData
-{
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        NSArray *videos = [self getVideos];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.videos = videos;
-            [NSNotificationCenter.defaultCenter postNotificationName:WKCAlbumVideoChangedNotification object:nil];
-            dispatch_semaphore_signal(semaphore);
-        });
-    });
-}
-
-- (NSArray <WKCVideo *>*)getVideos
-{
-    PHFetchOptions * options = [[PHFetchOptions alloc] init];
-    options.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO]];
-    
-    PHFetchResult <PHAsset *>* fetchResults = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeVideo options:options];
-    
-    NSMutableArray <WKCVideo *>* array = [NSMutableArray array];
-    
-    for (PHAsset * asset in fetchResults) {
-        [array addObject:[[WKCVideo alloc] initWithAsset:asset]];
-    }
-    
-    return array;
 }
 
 @end

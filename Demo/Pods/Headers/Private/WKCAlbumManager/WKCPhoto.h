@@ -1,1 +1,0 @@
-../../../WKCAlbumManager/WKCAlbumManager/WKCPhoto.h

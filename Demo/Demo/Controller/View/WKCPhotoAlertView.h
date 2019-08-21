@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "UIView+Alert.h"
+#import <YYImage.h>
 
 @interface WKCPhotoAlertView : UIView
 
-+ (void)showWithImage:(UIImage *)image;
++ (void)showWithImage:(YYImage *)image;
 
 @end
 

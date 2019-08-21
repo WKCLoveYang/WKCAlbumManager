@@ -7,19 +7,61 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "WKCPhoto.h"
+#import "WKCAlbumItem.h"
+
+/**
+ 想要获取的数据类型
+ @enum WKCAlbumRequstTypeImageOnly 只有静图
+ @enum WKCAlbumRequstTypeImageAndGif 静图和gif
+ @enum WKCAlbumRequstTypeImageAndGifAndLivePhoto 静图、Gif、Livephoto
+ @enum WKCAlbumRequstTypeVideoOnly Video
+ @enum WKCAlbumRequstTypeAudioOnly Audio
+ @enum WKCAlbumRequstTypeVideoAndAudio Video和Audio
+ @enum WKCAlbumRequstTypeAll 全部内容
+ */
+typedef NS_ENUM(NSInteger, WKCAlbumRequstType) {
+    WKCAlbumRequstTypeImageOnly               = 0,
+    WKCAlbumRequstTypeImageAndGif             = 1,
+    WKCAlbumRequstTypeLivePhotoOnly           = 2,
+    WKCAlbumRequstTypeImageAndGifAndLivePhoto = 3,
+    WKCAlbumRequstTypeVideoOnly               = 4,
+    WKCAlbumRequstTypeAudioOnly               = 5,
+    WKCAlbumRequstTypeVideoAndAudio           = 6,
+    WKCAlbumRequstTypeAll                     = 7
+};
+
 
 @interface WKCAlbum : NSObject
 
-// 图片数组
-@property (nonatomic, strong, readonly) NSArray <WKCPhoto *>* photos;
-// 缩略图
-@property (nonatomic, strong, readonly) WKCPhoto * thumbPhoto;
+/**
+  item数组
+ */
+@property (nonatomic, strong, readonly) NSArray <WKCAlbumItem *>* items;
+
+/**
+  缩略图item
+ */
+@property (nonatomic, strong, readonly) WKCAlbumItem * thumbItem;
+
+/**
+ collection
+ */
 @property (nonatomic, strong, readonly) PHAssetCollection * collection;
 
-- (instancetype)initWithCollection:(PHAssetCollection *)collection;
 
-- (void)fetchPhotos;
+
+/**
+  初始化
+  @param collection 相册集
+  @param type Requst类型
+ */
+- (instancetype)initWithCollection:(PHAssetCollection *)collection
+                        requstType:(WKCAlbumRequstType)type;
+
+/**
+  请求数据
+ */
+- (void)fetchItems;
 
 @end
 

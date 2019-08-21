@@ -1,0 +1,1 @@
+../../../WKCAlbumManager/WKCAlbumManager/WKCAlbumParams.h
