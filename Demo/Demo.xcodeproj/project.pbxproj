@@ -19,6 +19,7 @@
 		91046302230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = 91046301230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m */; };
 		91046305230A9C1B00A847F2 /* UIView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = 91046304230A9C1B00A847F2 /* UIView+Alert.m */; };
 		91046308230A9C3900A847F2 /* WKCPhotoAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91046307230A9C3900A847F2 /* WKCPhotoAlertView.m */; };
+		91CB319F230D6AE500FBD9FC /* WKCCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 91CB319D230D6AE500FBD9FC /* WKCCircleProgressView.m */; };
 		D1C70741030BFB4C91B7E22D /* libPods-default-Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DB5BB12A6141D25D73A6D9D /* libPods-default-Demo.a */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +48,8 @@
 		91046304230A9C1B00A847F2 /* UIView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Alert.m"; sourceTree = "<group>"; };
 		91046306230A9C3900A847F2 /* WKCPhotoAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKCPhotoAlertView.h; sourceTree = "<group>"; };
 		91046307230A9C3900A847F2 /* WKCPhotoAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WKCPhotoAlertView.m; sourceTree = "<group>"; };
+		91CB319D230D6AE500FBD9FC /* WKCCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCCircleProgressView.m; sourceTree = "<group>"; };
+		91CB319E230D6AE500FBD9FC /* WKCCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCCircleProgressView.h; sourceTree = "<group>"; };
 		BC017AA86580778D8CA6CD94 /* Pods-default-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-default-Demo.debug.xcconfig"; path = "Target Support Files/Pods-default-Demo/Pods-default-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +158,8 @@
 		910462FC230A7CD400A847F2 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				91CB319E230D6AE500FBD9FC /* WKCCircleProgressView.h */,
+				91CB319D230D6AE500FBD9FC /* WKCCircleProgressView.m */,
 				910462FD230A7CF200A847F2 /* WKCDetailCell.h */,
 				910462FE230A7CF200A847F2 /* WKCDetailCell.m */,
 			);
@@ -281,6 +286,7 @@
 				910462FB230A7BE800A847F2 /* DetailViewController.m in Sources */,
 				910462E1230A73B400A847F2 /* ViewController.m in Sources */,
 				910462EC230A73B500A847F2 /* main.m in Sources */,
+				91CB319F230D6AE500FBD9FC /* WKCCircleProgressView.m in Sources */,
 				91046302230A8ECB00A847F2 /* UIImageView+CommonAlphaLoad.m in Sources */,
 				91046308230A9C3900A847F2 /* WKCPhotoAlertView.m in Sources */,
 				91046305230A9C1B00A847F2 /* UIView+Alert.m in Sources */,

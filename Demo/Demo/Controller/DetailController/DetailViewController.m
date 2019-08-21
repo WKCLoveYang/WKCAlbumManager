@@ -98,7 +98,14 @@ UICollectionViewDataSourcePrefetching>
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    WKCDetailCell * cell = (WKCDetailCell *)[collectionView cellForItemAtIndexPath:indexPath];
     WKCAlbumItem * item = _album.items[indexPath.row];
+    WKCAlbumParams.shared.imageOptions.progressHandler = ^(double progress, NSError * _Nullable error, BOOL * _Nonnull stop, NSDictionary * _Nullable info) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"%f", progress);
+            cell.iCloudProgress = progress;
+        });
+    };
     [item fetchImageOrGifDataHandle:^(NSData *data, NSDictionary *info) {
         [WKCPhotoAlertView showWithImage:[YYImage imageWithData:data]];
     }];

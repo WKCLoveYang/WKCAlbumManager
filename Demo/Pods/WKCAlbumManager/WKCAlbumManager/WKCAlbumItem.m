@@ -27,11 +27,6 @@
     return self;
 }
 
-- (PHAssetImageProgressHandler)iCloudProgressHandle
-{
-    return WKCAlbumParams.shared.imageOptions.progressHandler;
-}
-
 - (WKCAlbumItemType)type
 {
     if (_asset.mediaType == PHAssetMediaTypeImage) {

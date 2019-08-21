@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong, readonly) UIImageView * iconImageView;
 @property (nonatomic, strong, readonly) UIImageView * iCloudImageView;
+@property (nonatomic, assign) CGFloat iCloudProgress;
 
 + (CGSize)itemSize;
 

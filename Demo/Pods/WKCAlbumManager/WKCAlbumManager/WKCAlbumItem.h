@@ -49,11 +49,6 @@ typedef NS_ENUM(NSInteger, WKCAlbumItemType) {
  */
 @property (nonatomic, assign, readonly) WKCAlbumItemType type;
 
-/**
- iCloud数据的下载进度
- */
-@property (nonatomic, copy, readonly) PHAssetImageProgressHandler iCloudProgressHandle;
-
 
 /**
   初始化
