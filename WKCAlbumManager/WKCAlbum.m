@@ -45,15 +45,8 @@
         switch (_type) {
             case WKCAlbumRequstTypeImageOnly:
             {
-                // 只要静图
-                if (@available(iOS 11.0, *)) {
-                    if (obj.mediaType == PHAssetMediaTypeImage && obj.playbackStyle == PHAssetPlaybackStyleImage) {
-                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
-                    }
-                } else {
-                    if (obj.mediaType == PHAssetMediaTypeImage) {
-                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
-                    }
+                if (obj.mediaType == PHAssetMediaTypeImage && obj.playbackStyle == PHAssetPlaybackStyleImage) {
+                    [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
                 }
             }
                 break;
@@ -68,28 +61,16 @@
                 
             case WKCAlbumRequstTypeLivePhotoOnly:
             {
-                if (@available(iOS 11.0, *)) {
-                    if (obj.playbackStyle == PHAssetPlaybackStyleLivePhoto) {
-                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
-                    }
-                } else {
-                    if (obj.mediaSubtypes == PHAssetMediaSubtypePhotoLive) {
-                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
-                    }
+                if (obj.playbackStyle == PHAssetPlaybackStyleLivePhoto) {
+                    [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
                 }
             }
                 break;
                 
             case WKCAlbumRequstTypeImageAndGifAndLivePhoto:
             {
-                if (@available(iOS 11.0, *)) {
-                    if (obj.mediaType == PHAssetMediaTypeImage || obj.playbackStyle == PHAssetPlaybackStyleLivePhoto) {
-                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
-                    }
-                } else {
-                    if (obj.mediaType == PHAssetMediaTypeImage || obj.mediaSubtypes == PHAssetMediaSubtypePhotoLive) {
-                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
-                    }
+                if (obj.mediaType == PHAssetMediaTypeImage || obj.playbackStyle == PHAssetPlaybackStyleLivePhoto) {
+                    [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
                 }
             }
                 break;
@@ -117,6 +98,14 @@
                 }
             }
                 break;
+                
+                case WKCAlbumRequstTypeImageAndVideo:
+                {
+                    if (obj.mediaType == PHAssetMediaTypeVideo || obj.mediaType == PHAssetMediaTypeImage) {
+                        [array addObject:[[VEDAlbumItem alloc] initWithAsset:obj]];
+                    }
+                }
+                    break;
                 
             case WKCAlbumRequstTypeAll:
             {

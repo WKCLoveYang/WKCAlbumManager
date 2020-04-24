@@ -31,11 +31,7 @@
 - (WKCAlbumItemType)type
 {
     if (_asset.mediaType == PHAssetMediaTypeImage) {
-        if (@available(iOS 11.0, *)) {
-            return _asset.playbackStyle == PHAssetPlaybackStyleImage ? WKCAlbumItemTypeImage : WKCAlbumItemTypeGif;
-        } else {
-            return WKCAlbumItemTypeImage;
-        }
+        return WKCAlbumItemTypeImage;
     } else if (_asset.mediaType == PHAssetMediaTypeVideo) {
         return WKCAlbumItemTypeVideo;
     } else if (_asset.mediaType == PHAssetMediaTypeAudio) {

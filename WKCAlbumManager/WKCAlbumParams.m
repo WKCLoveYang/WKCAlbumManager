@@ -59,6 +59,7 @@
     if (!_videoPtions) {
         _videoPtions = PHVideoRequestOptions.new;
         _videoPtions.networkAccessAllowed = YES;
+        _videoPtions.deliveryMode = PHVideoRequestOptionsDeliveryModeHighQualityFormat;
     }
     return _videoPtions;
 }

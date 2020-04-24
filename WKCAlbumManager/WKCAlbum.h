@@ -17,6 +17,7 @@
  @enum WKCAlbumRequstTypeVideoOnly Video
  @enum WKCAlbumRequstTypeAudioOnly Audio
  @enum WKCAlbumRequstTypeVideoAndAudio Video和Audio
+ @enum WKCAlbumRequstTypeImageAndVideo Video和Image
  @enum WKCAlbumRequstTypeAll 全部内容
  */
 typedef NS_ENUM(NSInteger, WKCAlbumRequstType) {
@@ -27,7 +28,8 @@ typedef NS_ENUM(NSInteger, WKCAlbumRequstType) {
     WKCAlbumRequstTypeVideoOnly               = 4,
     WKCAlbumRequstTypeAudioOnly               = 5,
     WKCAlbumRequstTypeVideoAndAudio           = 6,
-    WKCAlbumRequstTypeAll                     = 7
+    WKCAlbumRequstTypeImageAndVideo           = 7,
+    WKCAlbumRequstTypeAll                     = 8
 };
 
 
