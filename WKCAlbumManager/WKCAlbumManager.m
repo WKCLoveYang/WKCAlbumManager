@@ -95,7 +95,8 @@ typedef NS_ENUM(NSInteger, WKCAlbumSaveType) {
     for (PHAssetCollection * collection in collections) {
         WKCAlbum * album = [[WKCAlbum alloc] initWithCollection:collection requstType:self.requstType];
         [album fetchItems];
-        if (album.items && album.items.count != 0) {
+        // 去掉空、去掉最近删除
+        if (album.items && album.items.count != 0 && collection.assetCollectionSubtype != PHAssetCollectionSubtypeSmartAlbumRecentlyAdded) {
             [albums addObject:album];
         }
     }
