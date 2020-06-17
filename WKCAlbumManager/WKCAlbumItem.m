@@ -8,6 +8,7 @@
 
 #import "WKCAlbumItem.h"
 #import "WKCAlbumParams.h"
+#import <UIKit/UIKit.h>
 
 @interface WKCAlbumItem()
 

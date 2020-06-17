@@ -102,7 +102,7 @@
                 case WKCAlbumRequstTypeImageAndVideo:
                 {
                     if (obj.mediaType == PHAssetMediaTypeVideo || obj.mediaType == PHAssetMediaTypeImage) {
-                        [array addObject:[[VEDAlbumItem alloc] initWithAsset:obj]];
+                        [array addObject:[[WKCAlbumItem alloc] initWithAsset:obj]];
                     }
                 }
                     break;
